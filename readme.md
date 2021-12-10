@@ -1,13 +1,16 @@
 # Auto Draw
-### auto drawing script in python
+auto drawing script in python
+<br>
 
-file has to be an SVG path. Examples included. Kinda cursed tho :)
-
-Install by running
+File has to be an SVG path. Examples included. Kinda cursed tho :)
+You can add a picture by using Inkscape and it's XML editor (select the path and the string called 'd'. Copy it's contents, voila!)
+## Install
+Make sure you have python! (tested with python 3.9)
+Clone the repo, then install dependencies by running
 ```
 pip install -r requirements.txt
 ```
-and run
+after that run the script
 ```
 ds.py file [--scale=4] [--samples=4]
 ```
