@@ -6,7 +6,7 @@ import pyautogui
 import time
 import argparse, sys
 
-# SKŁADNIKI
+# args
 
 parser=argparse.ArgumentParser()
 
@@ -28,20 +28,18 @@ class pt:
         self.x = x
         self.y =y
 
-# USTAWIENIA
+# settings
 scale = args.scale
 samples = args.samples
 path = file_text(args.path) #zapisana w pliku
 
-
-
-
-# KOD
+# code
 points = []
 isUp = []
 ppath = parse_path(path)
 segs = ppath._segments; #to jest tak zajebiście śmieszna nazwa zmiennej.  x kurcze D
 
+print("Loading " +str(len(segs)) + " segments")
 
 for s in segs:
     o = s.point(0)
@@ -61,9 +59,9 @@ for s in segs:
 
 clen = len(points);
 
-print("Znaleziono " + str(clen) + " pkt. Przygotuj się! Rysowanie za 5 s")
+print("Found " + str(clen) + " points. Get ready and move your mouse to the desired location! Drawing in 7 s")
 
-time.sleep(5)
+time.sleep(7)
 
 up = True
 
@@ -73,7 +71,7 @@ shX = points[2].x
 shY = points[2].y
 
 for v in range(1, clen-1):
-    print("Rysuję " + str(v) + "/" + str(clen))
+    print("Drawing " + str(v) + "/" + str(clen) + "  ("+str(v/clen * 100) + "%)")
     if(isUp[v]):
         if not up:
             pyautogui.mouseUp()
@@ -83,12 +81,10 @@ for v in range(1, clen-1):
             pyautogui.mouseDown()
             up = False
     e = points[v]
-    #dx = (e.x * scale) - (s.x* scale)
-    #dy = (e.y * scale) - (s.y * scale)
     dx = e.x * scale + initX - (shX * scale)
     dy = e.y * scale + initY - (shY * scale)
     pyautogui.moveTo(dx,dy)
 
 pyautogui.mouseUp()
 
-print("Gotowe!")
+print("All done!")
